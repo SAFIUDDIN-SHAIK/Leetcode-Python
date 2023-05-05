@@ -1,0 +1,30 @@
+class Solution:
+    def maxVowels(self, s: str, k: int) -> int:
+
+        v = 'aeiou'
+        ans = 0
+        t = k if k < len(s) else len(s)
+
+        for i in s[:t]:
+
+            if i in v:
+
+                ans += 1
+        
+        c = ans
+        p = s[0]
+
+        for i in range(t, len(s)):
+
+            if p in v and s[i] not in v:
+
+                c -= 1
+            
+            if p not in v and s[i] in v:
+
+                c += 1
+            
+            p = s[i - t + 1]
+            ans = max(ans, c)
+        
+        return ans
