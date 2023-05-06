@@ -1,0 +1,20 @@
+class Solution:
+    def numSubseq(self, nums: List[int], target: int) -> int:
+
+        p2 = len(nums) - 1
+        ans = 0
+        m = 10 ** 9 + 7
+        nums.sort()
+
+        for i, num in enumerate(nums):
+
+            while num + nums[p2] > target and i <= p2:
+
+                p2 -= 1
+            
+            if i <= p2:
+
+                ans += 2 ** (p2 - i)
+                ans %= m
+            
+        return ans
