@@ -1,0 +1,54 @@
+# Solution - 1 - using recurssion and dictionary to know the repeated values
+
+class Solution:
+    def mostPoints(self, questions: List[List[int]]) -> int:
+
+        d = {}
+        
+        def f(ind):
+
+            if ind >= len(questions):
+
+                return 0
+
+            elif ind in d:
+
+                return d[ind]
+
+            else:
+
+                take_it = questions[ind][0] + f(ind + questions[ind][1] + 1)
+                leave_it = f(ind + 1)
+                d[ind] = max(take_it, leave_it)
+
+                return d[ind]
+            
+        return f(0)
+        
+# Solution - 2 - Using recurssion and dynamic programming
+
+class Solution:
+    def mostPoints(self, questions: List[List[int]]) -> int:
+
+        n = len(questions)
+        dp = [-1] * n
+
+        def f(ind):
+
+            if ind >= n:
+
+                return 0
+
+            elif dp[ind] != -1:
+
+                return dp[ind]
+
+            else:
+
+                take_it = questions[ind][0] + f(ind + questions[ind][1] + 1)
+                leave_it = f(ind + 1)
+                dp[ind] = max(take_it, leave_it)
+
+                return dp[ind]
+            
+        return f(0)
