@@ -1,0 +1,25 @@
+class Solution:
+    def doesValidArrayExist(self, d: List[int]) -> bool:
+        
+        n = len(d)
+        
+        if n == 1 and d[0] == 0:
+            
+            return True
+        
+        elif n == 1:
+        
+            return False
+        
+        org = [0] * n
+        org[1] = d[0]
+        
+        for i in range(2, n):
+            
+            org[i] = org[i -  1] ^ d[i - 1]
+        
+        if org[0] ^ org[n - 1] == d[n - 1]:
+            
+            return True
+        
+        return False
