@@ -1,0 +1,10 @@
+class Solution:
+    def findSmallestSetOfVertices(self, n: int, edges: List[List[int]]) -> List[int]:
+
+        ans = [0] * n
+
+        for i, j in edges:
+
+            ans[j] += 1
+        
+        return [i for i, j in enumerate(ans) if not j]
