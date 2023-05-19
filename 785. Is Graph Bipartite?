@@ -1,0 +1,41 @@
+from enum import Enum
+
+
+class f(Enum):
+
+  w = 0
+  r = 1
+  g = 2
+
+
+class Solution:
+
+  def isBipartite(self, graph: List[List[int]]) -> bool:
+
+    fs = [f.w] * len(graph)
+
+    for i in range(len(graph)):
+
+      if fs[i] != f.w:
+
+        continue
+
+      fs[i] = f.r
+      q = collections.deque([i])
+
+      while q:
+
+        u = q.popleft()
+
+        for v in graph[u]:
+
+          if fs[v] == fs[u]:
+
+            return False
+
+          if fs[v] == f.w:
+
+            fs[v] = f.r if fs[u] == f.g else f.g
+            q.append(v)
+
+    return True
