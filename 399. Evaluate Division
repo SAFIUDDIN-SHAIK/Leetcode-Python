@@ -1,0 +1,44 @@
+class Solution:
+  def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
+
+    ans = []
+    l = collections.defaultdict(dict)
+
+    for (a, b), i in zip(equations, values):
+
+      l[a][b] = i
+      l[b][a] = 1 / i
+
+    def f(a: str, c: str, v: Set[str]) -> float:
+
+      if a == c:
+
+        return 1.0
+
+      v.add(a)
+
+      for b, i in l[a].items():
+
+        if b in v:
+
+          continue
+
+        res = f(b, c, v)
+
+        if res > 0:
+
+          return i * res
+
+      return -1.0
+
+    for a, c in queries:
+
+      if a not in l and c not in l:
+
+        ans.append(-1.0)
+
+      else:
+          
+        ans.append(f(a, c, set()))
+
+    return ans
