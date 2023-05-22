@@ -1,0 +1,20 @@
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+
+        d = {}
+        ans = []
+
+        for i in nums:
+
+            if i in d:
+
+                d[i] += 1
+
+            else:
+
+                d[i] = 1
+        
+        ans = [[d[i], i] for i in d]
+        ans.sort(reverse = True)
+
+        return [i[1] for i in ans[:min(k, len(ans))]]
