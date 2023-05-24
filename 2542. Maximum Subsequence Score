@@ -1,0 +1,23 @@
+class Solution:
+
+  def maxScore(self, nums1: List[int], nums2: List[int], k: int) -> int:
+
+    ans = 0
+    s = 0
+    l = sorted([(i, j) for j, i in zip(nums1, nums2)], reverse=True)
+    t = []
+
+    for i, j in l:
+
+      heapq.heappush(t, j)
+      s += j
+
+      if len(t) > k:
+
+        s -= heapq.heappop(t)
+
+      if len(t) == k:
+
+        ans = max(ans, s * i)
+
+    return ans
