@@ -1,0 +1,32 @@
+class Solution:
+  def stoneGameIII(self, sv: List[int]) -> str:
+
+    @functools.lru_cache(None)
+
+    def f(i: int) -> int:
+
+      if i == len(sv):
+
+        return 0
+
+      ans = -math.inf
+      s = 0
+
+      for j in range(i, i + 3):
+
+        if j == len(sv):
+
+          break
+
+        s += sv[j]
+        ans = max(ans, s - f(j + 1))
+
+      return ans
+
+    final = f(0)
+
+    if final == 0:
+
+      return 'Tie'
+
+    return 'Alice' if final > 0 else 'Bob'
