@@ -1,0 +1,38 @@
+class Solution:
+
+  def maximumDetonation(self, bombs: List[List[int]]) -> int:
+
+    n = len(bombs)
+    ans = 0
+    l = [[] for _ in range(n)]
+
+    for i, (a, b, c) in enumerate(bombs):
+
+      for j, (e, f, g) in enumerate(bombs):
+
+        if i == j:
+
+          continue
+
+        if c ** 2 >= (a - e) ** 2 + (b - f) ** 2:
+
+          l[i].append(j)
+
+    def f(u: int, vis: Set[int]) -> None:
+
+      for v in l[u]:
+
+        if v in vis:
+
+          continue
+
+        vis.add(v)
+        f(v, vis)
+
+    for i in range(n):
+
+      vis = set([i])
+      f(i, vis)
+      ans = max(ans, len(vis))
+
+    return ans
