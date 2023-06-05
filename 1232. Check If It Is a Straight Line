@@ -1,0 +1,9 @@
+class Solution:
+
+  def checkStraightLine(self, coordinates: List[List[int]]) -> bool:
+
+    x1, y1, x2, y2 = *coordinates[0], *coordinates[1]
+    xi = x2 - x1
+    yi = y2 - y1
+
+    return all((x - x1) * yi == (y - y1) * xi for x, y in coordinates)
