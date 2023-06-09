@@ -1,0 +1,7 @@
+class Solution:
+
+  def nextGreatestLetter(self, letters: List[str], target: str) -> str:
+
+    ans = bisect.bisect_right(range(len(letters)), target, key=lambda i: letters[i])
+
+    return letters[ans % len(letters)]
