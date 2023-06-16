@@ -1,0 +1,34 @@
+class Solution:
+
+  def maxLevelSum(self, root: Optional[TreeNode]) -> int:
+
+    ans = 1
+    num = -math.inf
+    l = collections.deque([root])
+
+    up = 1
+
+    while l:
+
+      temp = 0
+
+      for _ in range(len(l)):
+        p = l.popleft()
+        temp += p.val
+
+        if p.left:
+
+          l.append(p.left)
+
+        if p.right:
+
+          l.append(p.right)
+
+      if num < temp:
+
+        num = temp
+        ans = up
+
+      up += 1
+
+    return ans
