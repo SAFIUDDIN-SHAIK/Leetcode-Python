@@ -1,0 +1,34 @@
+class Solution:
+
+  def countPaths(self, grid: List[List[int]]) -> int:
+
+    M = 1_000_000_007
+    m = len(grid)
+    n = len(grid[0])
+    l = [0, 1, 0, -1, 0]
+
+    @functools.lru_cache(None)
+
+    def f(i: int, j: int) -> int:
+
+      ans = 1
+
+      for k in range(4):
+
+        a = i + l[k]
+        b = j + l[k + 1]
+
+        if a < 0 or a == m or b < 0 or b == n:
+
+          continue
+
+        if grid[a][b] <= grid[i][j]:
+
+          continue
+
+        ans += f(a, b)
+        ans %= M
+
+      return ans
+
+    return sum(f(i, j) for i in range(m) for j in range(n)) % M
