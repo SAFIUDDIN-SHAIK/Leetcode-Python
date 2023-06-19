@@ -1,0 +1,13 @@
+class Solution:
+    
+    def largestAltitude(self, gain: List[int]) -> int:
+        
+        ans = 0
+        s = 0
+
+        for i in gain:
+
+            s += i
+            ans = max(ans, s)
+        
+        return ans
