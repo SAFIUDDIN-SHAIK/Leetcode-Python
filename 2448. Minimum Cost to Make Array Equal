@@ -1,0 +1,28 @@
+class Solution:
+
+  def minCost(self, nums: List[int], cost: List[int]) -> int:
+
+    ans = 0
+    mn = min(nums)
+    mx = max(nums)
+
+    def f(target: int) -> int:
+
+      return sum(abs(num - target) * c for num, c in zip(nums, cost))
+
+    while mn < mx:
+
+      mid = (mn + mx) // 2
+      num1 = f(mid)
+      num2 = f(mid + 1)
+      ans = min(num1, num2)
+
+      if num1 < num2:
+
+        mx = mid
+
+      else:
+
+        mn = mid + 1
+
+    return ans
