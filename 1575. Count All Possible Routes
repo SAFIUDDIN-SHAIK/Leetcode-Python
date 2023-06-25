@@ -1,0 +1,28 @@
+class Solution:
+
+  def countRoutes(self, locations: List[int], start: int, finish: int, fuel: int) -> int:
+
+    M = 1_000_000_007
+
+    @functools.lru_cache(None)
+
+    def f(i, num):
+
+      if num < 0:
+
+        return 0
+
+      ans = 1 if i == finish else 0
+
+      for j in range(len(locations)):
+
+        if j == i:
+
+          continue
+
+        ans += f(j, num - abs(locations[i] - locations[j]))
+        ans %= M
+
+      return ans
+
+    return f(start, fuel)
