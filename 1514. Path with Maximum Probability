@@ -1,0 +1,36 @@
+class Solution:
+  def maxProbability(self, n: int, edges: List[List[int]], succProb: List[float], start: int, end: int) -> float:
+
+    L = [[] for _ in range(n)]
+    ARR = [(-1.0, start)]
+    VIS = [False] * n
+
+    for i, ((NUM2, NUM1), NUM) in enumerate(zip(edges, succProb)):
+
+      L[NUM2].append((NUM1, NUM))
+      L[NUM1].append((NUM2, NUM))
+
+    while ARR:
+
+      NUM, NUM2 = heapq.heappop(ARR)
+      NUM *= -1
+
+      if NUM2 == end:
+
+        return NUM
+
+      if VIS[NUM2]:
+
+        continue
+
+      VIS[NUM2] = True
+
+      for nextNode, edgeProb in L[NUM2]:
+
+        if VIS[nextNode]:
+
+          continue
+
+        heapq.heappush(ARR, (-NUM * edgeProb, nextNode))
+
+    return 0
