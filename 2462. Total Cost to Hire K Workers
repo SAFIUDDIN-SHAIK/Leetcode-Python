@@ -1,0 +1,39 @@
+class Solution:
+
+  def totalCost(self, costs: List[int], k: int, candidates: int) -> int:
+
+    ans = 0
+    i = 0
+    j = len(costs) - 1
+    l = []
+    r = []
+
+    for _ in range(k):
+
+      while len(l) < candidates and i <= j:
+
+        heapq.heappush(l, costs[i])
+        i += 1
+
+      while len(r) < candidates and i <= j:
+
+        heapq.heappush(r, costs[j])
+        j -= 1
+
+      if not l:
+
+        ans += heapq.heappop(r)
+
+      elif not r:
+
+        ans += heapq.heappop(l)
+
+      elif l[0] <= r[0]:
+
+        ans += heapq.heappop(l)
+
+      else:
+
+        ans += heapq.heappop(r)
+
+    return ans
