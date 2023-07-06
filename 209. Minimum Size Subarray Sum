@@ -1,0 +1,19 @@
+class Solution:
+
+  def minSubArrayLen(self, s: int, nums: List[int]) -> int:
+
+    ans = math.inf
+    ttl = 0
+    c = 0
+
+    for ind, var in enumerate(nums):
+
+      ttl += var
+
+      while ttl >= s:
+
+        ans = min(ans, ind - c + 1)
+        ttl -= nums[c]
+        c += 1
+
+    return ans if ans != math.inf else 0
