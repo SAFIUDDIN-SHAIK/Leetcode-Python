@@ -1,0 +1,7 @@
+class Solution:
+
+  def putMarbles(self, weights: List[int], k: int) -> int:
+
+    l = [n1 + n2 for n1, n2 in itertools.pairwise(weights)]
+
+    return sum(heapq.nlargest(k - 1, l)) - sum(heapq.nsmallest(k - 1, l))
