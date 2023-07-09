@@ -1,0 +1,42 @@
+class Solution:
+
+  def largestVariance(self, s: str) -> int:
+
+    def kadane(a: str, b: str) -> int:
+
+      ans = 0
+      ca = 0
+      cb = 0
+      p = False
+
+      for ch in s:
+
+        if ch != a and ch != b:
+
+          continue
+
+        if ch == a:
+
+          ca += 1
+
+        else:
+
+          cb += 1
+
+        if cb > 0:
+
+          ans = max(ans, ca - cb)
+
+        elif cb == 0 and p:
+
+          ans = max(ans, ca - 1)
+
+        if cb > ca:
+
+          ca = 0
+          cb = 0
+          p = True
+
+      return ans
+
+    return max(kadane(c1, c2) for c1 in string.ascii_lowercase for c2 in string.ascii_lowercase if c1 != c2)
