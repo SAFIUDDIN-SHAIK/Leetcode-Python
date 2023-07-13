@@ -1,0 +1,41 @@
+from enum import Enum
+
+class c(Enum):
+
+  num = 0
+  n = 1
+  f = 2
+
+
+class Solution:
+
+  def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+
+    l = [[] for _ in range(numCourses)]
+    s = [c.num] * numCourses
+
+    for i, u in prerequisites:
+
+      l[u].append(i)
+
+    def hasCycle(u: int) -> bool:
+
+      if s[u] == c.n:
+
+        return True
+
+      if s[u] == c.f:
+
+        return False
+
+      s[u] = c.n
+
+      if any(hasCycle(i) for i in l[u]):
+
+        return True
+
+      s[u] = c.f
+
+      return False
+
+    return not any(hasCycle(i) for i in range(numCourses))
