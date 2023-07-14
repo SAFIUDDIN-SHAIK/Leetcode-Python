@@ -1,0 +1,13 @@
+class Solution:
+
+  def longestSubsequence(self, arr: List[int], difference: int) -> int:
+
+    ans = 0
+    d = {}
+
+    for n in arr:
+
+      d[n] = d.get(n - difference, 0) + 1
+      ans = max(ans, d[n])
+
+    return ans
