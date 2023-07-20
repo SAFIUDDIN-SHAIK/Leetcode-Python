@@ -1,0 +1,31 @@
+class Solution:
+
+  def asteroidCollision(self, asteroids: List[int]) -> List[int]:
+
+    l = []
+
+    for i in asteroids:
+
+      if i > 0:
+
+        l.append(i)
+
+      else:
+
+        while l and l[-1] > 0 and l[-1] < -i:
+
+          l.pop()
+
+        if not l or l[-1] < 0:
+
+          l.append(i)
+
+        elif l[-1] == -i:
+
+          l.pop()
+
+        else:
+
+          pass
+
+    return l
