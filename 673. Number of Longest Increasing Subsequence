@@ -1,0 +1,36 @@
+class Solution:
+
+  def findNumberOfLIS(self, nums: List[int]) -> int:
+
+    ans = 0
+    n = 0
+    arr = [1] * len(nums)
+    c = [1] * len(nums)
+
+    for i, num in enumerate(nums):
+
+      for j in range(i):
+
+        if nums[j] < num:
+
+          if arr[i] < arr[j] + 1:
+
+            arr[i] = arr[j] + 1
+            c[i] = c[j]
+
+          elif arr[i] == arr[j] + 1:
+
+            c[i] += c[j]
+
+    for i, j in enumerate(arr):
+
+      if j > n:
+
+        n = j
+        ans = c[i]
+
+      elif j == n:
+
+        ans += c[i]
+
+    return ans
