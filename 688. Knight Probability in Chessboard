@@ -1,0 +1,28 @@
+class Solution:
+
+  def knightProbability(self, n: int, K: int, r: int, c: int) -> float:
+
+    d = [(1, 2), (2, 1), (2, -1), (1, -2), (-1, -2), (-2, -1), (-2, 1), (-1, 2)]
+    l = [[0] * n for _ in range(n)]
+    l[r][c] = 1
+
+    for _ in range(K):
+
+      temp = [[0] * n for _ in range(n)]
+
+      for i in range(n):
+
+        for j in range(n):
+
+          for u, v in d:
+
+            x = i + u
+            y = j + v
+
+            if 0 <= x < n and 0 <= y < n:
+
+              temp[i][j] += l[x][y]
+
+      l = temp
+
+    return sum(map(sum, l)) / 8**K
