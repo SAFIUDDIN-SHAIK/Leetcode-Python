@@ -1,0 +1,18 @@
+class Solution:
+
+  def maxRunTime(self, n: int, batteries: List[int]) -> int:
+
+    ans = sum(batteries)
+
+    if n == 1:
+      
+      return ans
+
+    batteries.sort()
+
+    while batteries[-1] > ans // n:
+
+      ans -= batteries.pop()
+      n -= 1
+
+    return ans // n
