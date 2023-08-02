@@ -1,0 +1,30 @@
+class Solution:
+
+  def permute(self, nums: List[int]) -> List[List[int]]:
+
+    ans = []
+    L = [False] * len(nums)
+
+    def F(arr):
+
+      if len(arr) == len(nums):
+
+        ans.append(arr.copy())
+
+        return
+
+      for i, num in enumerate(nums):
+
+        if L[i]:
+
+          continue
+
+        L[i] = True
+        arr.append(num)
+        F(arr)
+        arr.pop()
+        L[i] = False
+
+    F([])
+
+    return ans
