@@ -1,0 +1,17 @@
+class Solution:
+
+  def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+
+    w = set(wordDict)
+
+    @functools.lru_cache(None)
+
+    def f(s: str) -> bool:
+
+      if s in w:
+
+        return True
+
+      return any(s[:i] in w and f(s[i:]) for i in range(len(s)))
+
+    return f(s)
