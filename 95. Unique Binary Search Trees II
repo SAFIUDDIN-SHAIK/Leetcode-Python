@@ -1,0 +1,29 @@
+class Solution:
+
+  def generateTrees(self, n: int) -> List[TreeNode]:
+
+    if n == 0:
+
+      return []
+
+    def f(mn, mx):
+
+      if mn > mx:
+
+        return [None]
+
+      ans = []
+
+      for i in range(mn, mx + 1):
+
+        for left in f(mn, i - 1):
+
+          for right in f(i + 1, mx):
+
+            ans.append(TreeNode(i))
+            ans[-1].left = left
+            ans[-1].right = right
+
+      return ans
+
+    return f(1, n)
