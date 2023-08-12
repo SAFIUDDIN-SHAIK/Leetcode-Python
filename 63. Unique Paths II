@@ -1,0 +1,18 @@
+class Solution:
+
+  def uniquePathsWithObstacles(self, obstacleGrid: List[List[int]]) -> int:
+
+    n1 = len(obstacleGrid)
+    n2 = len(obstacleGrid[0])
+    l = [[0] * (n2 + 1) for _ in range(n1 + 1)]
+    l[0][1] = 1
+
+    for i in range(1, n1 + 1):
+
+      for j in range(1, n2 + 1):
+
+        if obstacleGrid[i - 1][j - 1] == 0:
+
+          l[i][j] = l[i - 1][j] + l[i][j - 1]
+
+    return l[n1][n2]
