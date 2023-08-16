@@ -1,0 +1,24 @@
+class Solution:
+
+  def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+
+    ans = []
+    l = collections.deque()
+
+    for i, j in enumerate(nums):
+
+      while l and l[-1] < j:
+
+        l.pop()
+
+      l.append(j)
+
+      if i >= k and nums[i - k] == l[0]:
+
+        l.popleft()
+
+      if i >= k - 1:
+
+        ans.append(l[0])
+
+    return ans
