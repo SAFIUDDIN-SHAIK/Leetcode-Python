@@ -1,0 +1,41 @@
+class Solution:
+
+  def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+
+    m = len(mat)
+    n = len(mat[0])
+    d = [0, 1, 0, -1, 0]
+    l = collections.deque()
+    vis = [[False] * n for _ in range(m)]
+
+    for i in range(m):
+
+      for j in range(n):
+
+        if mat[i][j] == 0:
+
+          l.append((i, j))
+          vis[i][j] = True
+
+    while l:
+
+      i, j = l.popleft()
+
+      for k in range(4):
+
+        x = i + d[k]
+        y = j + d[k + 1]
+
+        if x < 0 or x == m or y < 0 or y == n:
+
+          continue
+
+        if vis[x][y]:
+
+          continue
+
+        mat[x][y] = mat[i][j] + 1
+        l.append((x, y))
+        vis[x][y] = True
+
+    return mat
