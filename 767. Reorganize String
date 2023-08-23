@@ -1,0 +1,29 @@
+class Solution:
+
+  def reorganizeString(self, s: str) -> str:
+
+    c = collections.Counter(s)
+
+    if max(c.values()) > (len(s) + 1) // 2:
+
+      return ''
+
+    ans = []
+    l = [(-t, c) for c, t in c.items()]
+    heapq.heapify(l)
+    f = 0
+    p = '@'
+
+    while l:
+
+      t, c = heapq.heappop(l)
+      ans.append(c)
+
+      if f < 0:
+
+        heapq.heappush(l, (f, p))
+
+      f = t + 1
+      p = c
+
+    return ''.join(ans)
