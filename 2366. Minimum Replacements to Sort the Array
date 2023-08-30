@@ -1,0 +1,15 @@
+class Solution:
+
+  def minimumReplacement(self, nums: List[int]) -> int:
+
+    ans = 0
+
+    num = nums[-1]
+
+    for i in range(len(nums) - 2, -1, -1):
+
+      temp = (nums[i] - 1) // num
+      ans += temp
+      num = nums[i] // (temp + 1)
+
+    return ans
