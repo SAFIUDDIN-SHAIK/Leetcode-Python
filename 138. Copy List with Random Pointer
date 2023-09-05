@@ -1,0 +1,20 @@
+class Solution:
+
+  def copyRandomList(self, head: 'Node') -> 'Node':
+
+    if not head:
+
+      return None
+
+    if head in self.d:
+
+      return self.d[head]
+
+    n = Node(head.val)
+    self.d[head] = n
+    n.next = self.copyRandomList(head.next)
+    n.random = self.copyRandomList(head.random)
+
+    return n
+
+  d = {}
