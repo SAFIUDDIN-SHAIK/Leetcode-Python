@@ -1,0 +1,25 @@
+class Solution:
+
+    def groupThePeople(self, groupSizes: List[int]) -> List[List[int]]:
+
+        ans = []
+        d = defaultdict(list)
+
+        for i, n in enumerate(groupSizes):
+
+          d[n].append(i)
+
+        for n, indices in d.items():
+
+          l = []
+
+          for index in indices:
+
+            l.append(index)
+
+            if len(l) == n:
+
+              ans.append(l.copy())
+              l.clear()
+
+        return ans
