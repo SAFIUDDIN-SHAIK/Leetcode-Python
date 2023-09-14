@@ -1,0 +1,22 @@
+class Solution:
+
+  def findItinerary(self, tickets: List[List[str]]) -> List[str]:
+
+    ans = []
+    d = collections.defaultdict(list)
+
+    for i, j in reversed(sorted(tickets)):
+
+      d[i].append(j)
+
+    def f(u: str) -> None:
+
+      while u in d and d[u]:
+
+        f(d[u].pop())
+
+      ans.append(u)
+
+    f('JFK')
+
+    return ans[::-1]
