@@ -1,0 +1,42 @@
+class Solution:
+
+  def minimumEffortPath(self, heights: List[List[int]]) -> int:
+
+    m = len(heights)
+    n = len(heights[0])
+    d = [0, 1, 0, -1, 0]
+    l = [[math.inf] * n for _ in range(m)]
+    vis = set()
+    arr = [(0, 0, 0)]
+    l[0][0] = 0
+
+    while arr:
+
+      ans, i, j = heapq.heappop(arr)
+
+      if i == m - 1 and j == n - 1:
+
+        return ans
+
+      vis.add((i, j))
+
+      for k in range(4):
+
+        a = i + d[k]
+        b = j + d[k + 1]
+
+        if a < 0 or a == m or b < 0 or b == n:
+
+          continue
+
+        if (a, b) in vis:
+
+          continue
+
+        newDiff = abs(heights[i][j] - heights[a][b])
+        maxDiff = max(l[i][j], newDiff)
+
+        if l[a][b] > maxDiff:
+
+          l[a][b] = maxDiff
+          heapq.heappush(arr, (l[a][b], a, b))
