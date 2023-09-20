@@ -1,0 +1,32 @@
+class Solution:
+
+  def minOperations(self, nums: List[int], x: int) -> int:
+
+    s = sum(nums) - x
+
+    if s == 0:
+
+      return len(nums)
+
+    n = self.f(nums, s)
+
+    return -1 if n == -1 else len(nums) - n
+
+  def f(self, nums: List[int], x: int) -> int:
+
+    ans = -1
+    p = 0
+    d = {0: -1}
+
+    for i, n in enumerate(nums):
+
+      p += n
+      t = p - x
+
+      if t in d:
+
+        ans = max(ans, i - d[t])
+
+      d[p] = i
+
+    return ans
