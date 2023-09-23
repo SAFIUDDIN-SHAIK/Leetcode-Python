@@ -1,0 +1,21 @@
+class Solution:
+
+  def longestStrChain(self, words: List[str]) -> int:
+    st = set(words)
+
+    @functools.lru_cache(None)
+    def f(s: str) -> int:
+
+      ans = 1
+
+      for i in range(len(s)):
+
+        t = s[:i] + s[i + 1:]
+
+        if t in st:
+
+          ans = max(ans, f(t) + 1)
+
+      return ans
+
+    return max(f(i) for i in words)
