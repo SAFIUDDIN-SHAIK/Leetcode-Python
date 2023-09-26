@@ -1,0 +1,25 @@
+class Solution:
+
+  def removeDuplicateLetters(self, s: str) -> str:
+
+    ans = []
+    f = collections.Counter(s)
+    se = [False] * 26
+
+    for i in s:
+
+      f[i] -= 1
+
+      if se[ord(i) - ord('a')]:
+
+        continue
+
+      while ans and ans[-1] > i and f[ans[-1]] > 0:
+
+        se[ord(ans[-1]) - ord('a')] = False
+        ans.pop()
+
+      ans.append(i)
+      se[ord(ans[-1]) - ord('a')] = True
+
+    return ''.join(ans)
