@@ -1,0 +1,31 @@
+class Solution:
+
+  def decodeAtIndex(self, s: str, k: int) -> str:
+
+    n = 0
+
+    for i in s:
+
+      if i.isdigit():
+
+        n *= int(i)
+
+      else:
+
+        n += 1
+
+    for i in reversed(s):
+
+      k %= n
+
+      if k == 0 and i.isalpha():
+
+        return i
+
+      if i.isdigit():
+
+        n //= int(i)
+
+      else:
+
+        n -= 1
