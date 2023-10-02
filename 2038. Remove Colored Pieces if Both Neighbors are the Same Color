@@ -1,0 +1,18 @@
+class Solution:
+
+  def winnerOfGame(self, colors: str) -> bool:
+
+    c1 = 0
+    c2 = 0
+
+    for i, j, k in zip(colors, colors[1:], colors[2:]):
+
+      if 'A' == i == j == k:
+
+        c1 += 1
+
+      elif 'B' == i == j == k:
+
+        c2 += 1
+
+    return c1 > c2
