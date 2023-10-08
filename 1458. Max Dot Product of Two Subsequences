@@ -1,0 +1,15 @@
+class Solution:
+
+  def maxDotProduct(self, A: List[int], B: List[int]) -> int:
+
+    n = len(A)
+    m = len(B)
+    l = [[-math.inf] * (m + 1) for bruh in range(n + 1)]
+
+    for i in range(n):
+
+      for j in range(m):
+
+        l[i + 1][j + 1] = max(l[i][j + 1], l[i + 1][j], max(0, l[i][j]) + A[i] * B[j])
+
+    return l[n][m]
