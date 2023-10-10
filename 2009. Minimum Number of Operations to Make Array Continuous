@@ -1,0 +1,16 @@
+class Solution:
+
+  def minOperations(self, nums: List[int]) -> int:
+
+    n = len(nums)
+    ans = n
+    nums = sorted(set(nums))
+
+    for i, j in enumerate(nums):
+
+      x = j + n - 1
+      temp = bisect_right(nums, x)
+      l = temp - i
+      ans = min(ans, n - l)
+
+    return ans
