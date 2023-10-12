@@ -1,0 +1,75 @@
+# """
+# This is MountainArray's API interface.
+# You should not implement it, or speculate about its implementation
+# """
+# Class MountainArray:
+#   def get(self, index: int) -> int:
+#   def length(self) -> int:
+
+class Solution:
+
+  def findInMountainArray(self, target: int, mountain_arr: 'MountainArray') -> int:
+    n = mountain_arr.length()
+    t = self.high(mountain_arr, 0, n - 1)
+
+    l = self.left(mountain_arr, target, 0, t)
+
+    if mountain_arr.get(l) == target:
+
+      return l
+
+    r = self.right(mountain_arr, target, t + 1, n - 1)
+
+    if mountain_arr.get(r) == target:
+
+      return r
+
+    return -1
+
+  def high(self, obj: 'MountainArray', l: int, r: int) -> int:
+
+    while l < r:
+
+      m = (l + r) // 2
+
+      if obj.get(m) < obj.get(m + 1):
+
+        l = m + 1
+
+      else:
+
+        r = m
+
+    return l
+
+  def left(self, obj: 'MountainArray', target: int, l: int, r: int) -> int:
+
+    while l < r:
+
+      m = (l + r) // 2
+
+      if obj.get(m) < target:
+
+        l = m + 1
+
+      else:
+
+        r = m
+
+    return l
+
+  def right(self, obj: 'MountainArray', target: int, l: int, r: int) -> int:
+
+    while l < r:
+
+      m = (l + r) // 2
+
+      if obj.get(m) > target:
+
+        l = m + 1
+
+      else:
+
+        r = m
+
+    return l
