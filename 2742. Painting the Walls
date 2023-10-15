@@ -1,0 +1,15 @@
+class Solution:
+
+  def paintWalls(self, cost: List[int], time: List[int]) -> int:
+
+    kMax = 500_000_000
+    n = len(cost)
+    l = [0] + [kMax] * n
+
+    for i, j in zip(cost, time):
+
+      for walls in range(n, 0, -1):
+
+        l[walls] = min(l[walls], l[max(walls - j - 1, 0)] + i)
+
+    return l[n]
