@@ -1,0 +1,31 @@
+class Solution:
+
+  def minimumTime(self, n: int, relations: List[List[int]], time: List[int]) -> int:
+
+    l = [[] for _ in range(n)]
+    arr = [0] * n
+    d = time.copy()
+
+    for i, j in relations:
+
+      a = i - 1
+      b = j - 1
+      l[a].append(b)
+      arr[b] += 1
+
+    temp = collections.deque([i for i, d in enumerate(arr) if d == 0])
+
+    while temp:
+
+      a = temp.popleft()
+
+      for b in l[a]:
+
+        d[b] = max(d[b], d[a] + time[b])
+        arr[b] -= 1
+
+        if arr[b] == 0:
+
+          temp.append(b)
+
+    return max(d)
