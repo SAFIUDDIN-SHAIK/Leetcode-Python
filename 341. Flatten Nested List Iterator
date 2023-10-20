@@ -1,0 +1,26 @@
+class NestedIterator:
+
+  def __init__(self, nestedList: List[NestedInteger]):
+
+    self.l = collections.deque()
+    self.addInteger(nestedList)
+
+  def next(self) -> int:
+
+    return self.l.popleft()
+
+  def hasNext(self) -> bool:
+
+    return self.l
+
+  def addInteger(self, nestedList: List[NestedInteger]) -> None:
+
+    for i in nestedList:
+
+      if i.isInteger():
+
+        self.l.append(i.getInteger())
+
+      else:
+
+        self.addInteger(i.getList())
