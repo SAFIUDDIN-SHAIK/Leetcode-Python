@@ -1,0 +1,28 @@
+class Solution:
+
+  def constrainedSubsetSum(self, nums: List[int], k: int) -> int:
+
+    l = [0] * len(nums)
+    q = collections.deque()
+
+    for i, j in enumerate(nums):
+
+      if q:
+
+        l[i] = max(q[0], 0) + j
+
+      else:
+
+        l[i] = j
+
+      while q and q[-1] < l[i]:
+
+        q.pop()
+
+      q.append(l[i])
+
+      if i >= k and l[i - k] == q[0]:
+
+        q.popleft()
+
+    return max(l)
