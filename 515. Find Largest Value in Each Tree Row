@@ -1,0 +1,31 @@
+class Solution:
+
+  def largestValues(self, root: Optional[TreeNode]) -> List[int]:
+
+    if not root:
+
+      return []
+
+    ans = []
+    l = collections.deque([root])
+
+    while l:
+
+      num = -math.inf
+
+      for _ in range(len(l)):
+
+        root = l.popleft()
+        num = max(num, root.val)
+
+        if root.left:
+
+          l.append(root.left)
+
+        if root.right:
+
+          l.append(root.right)
+
+      ans.append(num)
+
+    return ans
