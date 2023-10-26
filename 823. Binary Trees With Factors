@@ -1,0 +1,24 @@
+class Solution:
+
+  def numFactoredBinaryTrees(self, arr: List[int]) -> int:
+
+    m = 1_000_000_007
+    n = len(arr)
+    l = [1] * n
+    arr.sort()
+    d = {a: i for i, a in enumerate(arr)}
+
+    for i, k in enumerate(arr):
+
+      for j in range(i):
+
+        if k % arr[j] == 0:
+
+          temp = k // arr[j]
+
+          if temp in d:
+
+            l[i] += l[j] * l[d[temp]]
+            l[i] %= m
+
+    return sum(l) % m
