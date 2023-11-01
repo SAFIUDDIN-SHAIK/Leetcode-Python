@@ -1,0 +1,43 @@
+class Solution:
+
+  def findMode(self, root: Optional[TreeNode]) -> List[int]:
+
+    self.ans = []
+    self.p = None
+    self.c = 0
+    self.n = 0
+
+    def f1(root):
+
+      if self.p and self.p.val == root.val:
+
+        self.c += 1
+
+      else:
+
+        self.c = 1
+
+      if self.c > self.n:
+
+        self.n = self.c
+        self.ans = [root.val]
+
+      elif self.c == self.n:
+
+        self.ans.append(root.val)
+
+      self.p = root
+
+    def f2(root):
+
+      if not root:
+
+        return
+
+      f2(root.left)
+      f1(root)
+      f2(root.right)
+
+    f2(root)
+
+    return self.ans
