@@ -1,0 +1,7 @@
+class Solution:
+
+  def isReachableAtTime(self, sx: int, sy: int, fx: int, fy: int, t: int) -> bool:
+
+    n = max(abs(sx - fx), abs(sy - fy))
+
+    return t != 1 if n == 0 else n <= t
