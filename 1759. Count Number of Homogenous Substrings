@@ -1,0 +1,17 @@
+class Solution:
+
+  def countHomogenous(self, s: str) -> int:
+
+    m = 1_000_000_007
+    ans = 0
+    c = 0
+    cc = '@'
+
+    for ch in s:
+
+      c = c + 1 if ch == cc else 1
+      cc = ch
+      ans += c
+      ans %= m
+
+    return ans
