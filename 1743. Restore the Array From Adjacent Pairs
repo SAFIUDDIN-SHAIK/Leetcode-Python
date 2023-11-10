@@ -1,0 +1,36 @@
+class Solution:
+
+  def restoreArray(self, adjacentPairs: List[List[int]]) -> List[int]:
+
+    ans = []
+    l = collections.defaultdict(list)
+
+    for i, j in adjacentPairs:
+
+      l[i].append(j)
+      l[j].append(i)
+
+    for i, j in l.items():
+
+      if len(j) == 1:
+
+        ans.append(i)
+        ans.append(j[0])
+
+        break
+
+    while len(ans) < len(adjacentPairs) + 1:
+
+      i = ans[-1]
+      temp = ans[-2]
+      j = l[i]
+
+      if j[0] == temp:
+
+        ans.append(j[1])
+
+      else:
+
+        ans.append(j[0])
+
+    return ans
