@@ -1,0 +1,43 @@
+class Solution:
+
+  def numBusesToDestination(self, routes: List[List[int]], source: int, target: int) -> int:
+
+    if source == target:
+
+      return 0
+
+    l = collections.defaultdict(list)
+    s = set()
+
+    for i in range(len(routes)):
+
+      for j in routes[i]:
+
+        l[j].append(i)
+
+    ans = 0
+    dq = collections.deque([source])
+
+    while dq:
+
+      ans += 1
+
+      for _ in range(len(dq)):
+
+        for i in l[dq.popleft()]:
+
+          if i in s:
+
+            continue
+
+          s.add(i)
+
+          for j in routes[i]:
+
+            if j == target:
+
+              return ans
+
+            dq.append(j)
+
+    return -1
