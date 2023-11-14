@@ -1,0 +1,21 @@
+class Solution:
+
+  def countPalindromicSubsequence(self, s: str) -> int:
+
+    ans = 0
+    a = [len(s)] * 26
+    b = [0] * 26
+
+    for i, j in enumerate(s):
+
+      ind = ord(j) - ord('a')
+      a[ind] = min(a[ind], i)
+      b[ind] = i
+
+    for i, j in zip(a, b):
+
+      if i < j:
+
+        ans += len(set(s[i + 1:j]))
+
+    return ans
