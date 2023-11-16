@@ -1,0 +1,13 @@
+class Solution:
+
+  def findDifferentBinaryString(self, nums: List[str]) -> str:
+
+    b = len(nums[0])
+    n = 1 << b
+    s = {int(i, 2) for i in nums}
+
+    for i in range(n):
+
+      if i not in s:
+
+        return f'{i:0>{b}b}'
