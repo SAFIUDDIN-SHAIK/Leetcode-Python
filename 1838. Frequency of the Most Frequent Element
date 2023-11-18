@@ -1,0 +1,21 @@
+class Solution:
+
+  def maxFrequency(self, nums: List[int], k: int) -> int:
+
+    ans = 0
+    s = 0
+    nums.sort()
+    c = 0
+
+    for i, j in enumerate(nums):
+
+      s += j
+
+      while s + k < j * (i - c + 1):
+
+        s -= nums[c]
+        c += 1
+
+      ans = max(ans, i - c + 1)
+
+    return ans
