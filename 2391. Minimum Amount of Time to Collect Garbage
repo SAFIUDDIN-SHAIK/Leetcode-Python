@@ -1,0 +1,22 @@
+class Solution:
+
+  def garbageCollection(self, garbage: List[str], travel: List[int]) -> int:
+
+    l = list(itertools.accumulate(travel))
+
+    def f(s: str) -> int:
+
+      n = 0
+      p = -1
+
+      for i, j in enumerate(garbage):
+
+        if any(k == s for k in j):
+
+          p = i
+
+        n += j.count(s)
+
+      return n + (0 if p <= 0 else l[p - 1])
+
+    return f('M') + f('P') + f('G')
