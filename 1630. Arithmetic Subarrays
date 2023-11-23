@@ -1,0 +1,30 @@
+class Solution:
+
+  def checkArithmeticSubarrays(self, nums: List[int], l: List[int], r: List[int]) -> List[bool]:
+
+    return [self.f(nums, i, j) for i, j in zip(l, r)]
+
+
+  def f(self, nums, l, r):
+
+    if r - l < 2:
+
+      return True
+
+    s = set()
+    mn = math.inf
+    mx = -math.inf
+
+    for i in range(l, r+1):
+
+      mn = min(mn, nums[i])
+      mx = max(mx, nums[i])
+      s.add(nums[i])
+
+    if (mx - mn) % (r - l) != 0:
+
+      return False
+
+    num = (mx - mn) // (r - l)
+
+    return all(mn + i * num in s for i in range(1, r - l + 1))
