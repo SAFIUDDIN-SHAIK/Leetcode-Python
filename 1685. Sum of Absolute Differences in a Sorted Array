@@ -1,0 +1,8 @@
+class Solution:
+
+  def getSumAbsoluteDifferences(self, nums: List[int]) -> List[int]:
+
+    a = list(itertools.accumulate(nums))
+    b = list(itertools.accumulate(nums[::-1]))[::-1]
+
+    return [j * (i + 1) - a[i] + b[i] - j * (len(nums) - i) for i, j in enumerate(nums)]
