@@ -1,0 +1,20 @@
+class Solution:
+
+  def largestSubmatrix(self, matrix: List[List[int]]) -> int:
+
+    ans = 0
+    l = [0] * len(matrix[0])
+
+    for i in matrix:
+
+      for j, k in enumerate(i):
+
+        l[j] = 0 if k == 0 else l[j] + 1
+
+      sortedHist = sorted(l)
+
+      for j, k in enumerate(sortedHist):
+
+        ans = max(ans, k * (len(i) - j))
+
+    return ans
