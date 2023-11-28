@@ -1,0 +1,22 @@
+class Solution:
+
+  def numberOfWays(self, corridor: str) -> int:
+
+    M = 1_000_000_007
+    ans = 1
+    p = -1
+    num = 0
+
+    for i, j in enumerate(corridor):
+
+      if j == 'S':
+
+        num += 1
+
+        if num > 2 and num & 1:
+
+          ans = ans * (i - p) % M
+
+        p = i
+
+    return ans if num > 1 and num % 2 == 0 else 0
