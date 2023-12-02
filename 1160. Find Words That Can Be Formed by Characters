@@ -1,0 +1,23 @@
+class Solution:
+
+  def countCharacters(self, words: List[str], chars: str) -> int:
+
+    ans = 0
+    d = collections.Counter(chars)
+
+    for i in words:
+
+      num = d.copy()
+
+      for j in i:
+
+        num[j] -= 1
+
+        if num[j] < 0:
+
+          ans -= len(i)
+          break
+
+      ans += len(i)
+
+    return ans
