@@ -1,0 +1,14 @@
+class Solution:
+    
+    def totalMoney(self, n: int) -> int:
+        
+        tw = n // 7
+        ws = 28 * tw + 7 * (tw - 1) * tw // 2
+        rd = n % 7
+        lws = rd * (rd + 1) // 2 + rd * tw
+
+        if ws >= 0:
+
+            return ws + lws
+        
+        return lws
