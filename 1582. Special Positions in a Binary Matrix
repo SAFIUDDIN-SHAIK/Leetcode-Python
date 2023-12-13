@@ -1,0 +1,28 @@
+class Solution:
+
+  def numSpecial(self, l: List[List[int]]) -> int:
+
+    m = len(l)
+    n = len(l[0])
+    ans = 0
+    a = [0] * m
+    b = [0] * n
+
+    for i in range(m):
+
+      for j in range(n):
+
+        if l[i][j] == 1:
+
+          a[i] += 1
+          b[j] += 1
+
+    for i in range(m):
+
+      for j in range(n):
+
+        if l[i][j] == 1 and a[i] == 1 and b[j] == 1:
+
+          ans += 1
+
+    return ans
