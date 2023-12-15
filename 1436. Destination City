@@ -1,0 +1,23 @@
+class Solution:
+
+  def destCity(self, paths: List[List[str]]) -> str:
+
+    d = collections.Counter()
+
+    for i, j in paths:
+
+      d[i] += 1
+
+    for i, j in paths:
+
+      if j in d:
+
+        d[j] -= 1
+
+        if d[j] == 0:
+
+          del d[j]
+
+      else:
+
+        return j
