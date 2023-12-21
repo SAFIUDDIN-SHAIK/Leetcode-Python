@@ -1,0 +1,21 @@
+class Solution:
+
+  def tree2str(self, t: Optional[TreeNode]) -> str:
+
+    def f(head):
+
+      if not head:
+
+        return ''
+
+      if head.right:
+
+        return str(head.val) + '(' + f(head.left) + ')(' + f(head.right) + ')'
+
+      if head.left:
+
+        return str(head.val) + '(' + f(head.left) + ')'
+
+      return str(head.val)
+
+    return f(t)
