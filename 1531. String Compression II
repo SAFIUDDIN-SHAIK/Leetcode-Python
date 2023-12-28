@@ -1,0 +1,44 @@
+class Solution:
+  def getLengthOfOptimalCompression(self, s: str, k: int) -> int:
+
+    def lgt(f):
+
+      if f == 1:
+      
+        return 1
+      
+      if f < 10:
+      
+        return 2
+      
+      if f < 100:
+      
+        return 3
+      
+      return 4
+
+    @functools.lru_cache(None)
+
+    def func(i, k):
+
+      if k < 0:
+      
+        return math.inf
+      
+      if i == len(s) or len(s) - i <= k:
+      
+        return 0
+
+      ans = math.inf
+      f = 0
+      d = collections.Counter()
+      
+      for j in range(i, len(s)):
+      
+        d[s[j]] += 1
+        f = max(f, d[s[j]])
+        ans = min(ans, lgt(f) + func(j + 1, k - (j - i + 1 - f)))
+
+      return ans
+
+    return func(0, k)
