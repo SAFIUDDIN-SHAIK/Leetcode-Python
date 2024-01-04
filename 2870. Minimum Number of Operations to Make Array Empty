@@ -1,0 +1,11 @@
+class Solution:
+
+  def minOperations(self, nums: List[int]) -> int:
+
+    d = collections.Counter(nums)
+
+    if 1 in d.values():
+
+      return -1
+
+    return sum((freq + 2) // 3 for freq in d.values())
