@@ -1,0 +1,55 @@
+class Solution:
+
+  def amountOfTime(self, root: Optional[TreeNode], start: int) -> int:
+
+    ans = -1
+    d = self.f(root)
+    l = collections.deque([start])
+    vis = {start}
+
+    while l:
+
+      ans += 1
+
+      for _ in range(len(l)):
+
+        num = l.popleft()
+
+        if num not in d:
+
+          continue
+
+        for val in d[num]:
+
+          if val in vis:
+
+            continue
+
+          l.append(val)
+          vis.add(val)
+
+    return ans
+
+  def f(self, root):
+
+    d = collections.defaultdict(list)
+    l = collections.deque([(root, -1)])
+
+    while l:
+
+      n, num1 = l.popleft()
+
+      if num1 != -1:
+
+        d[num1].append(n.val)
+        d[n.val].append(num1)
+
+      if n.left:
+
+        l.append((n.left, n.val))
+
+      if n.right:
+
+        l.append((n.right, n.val))
+
+    return d
