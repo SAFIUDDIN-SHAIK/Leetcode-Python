@@ -1,0 +1,27 @@
+class Solution:
+    def minSteps(self, s: str, t: str) -> int:
+        
+        ds = {}
+        dt = {}
+
+        for i in range(97, 123):
+            
+            ds[chr(i)] = 0
+
+        for i in s:
+
+            ds[i] += 1
+        
+        ans = 0
+
+        for i in t:
+
+            if ds[i]:
+
+                ds[i] -= 1
+            
+            else:
+
+                ans += 1
+
+        return ans
