@@ -1,0 +1,23 @@
+class Solution:
+
+  def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:
+
+    l = sorted([(s, e, p) for s, e, p in zip(startTime, endTime, profit)])
+
+    for n in range(len(startTime)):
+
+      startTime[n] = l[n][0]
+
+    @functools.lru_cache(None)
+
+    def f(n):
+
+      if n == len(startTime):
+
+        return 0
+
+      n2 = bisect.bisect_left(startTime, l[n][1])
+
+      return max(l[n][2] + f(n2), f(n + 1))
+
+    return f(0)
