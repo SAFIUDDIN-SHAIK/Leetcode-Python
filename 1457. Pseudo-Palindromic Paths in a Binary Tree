@@ -1,0 +1,30 @@
+class Solution:
+
+  def pseudoPalindromicPaths(self, head: Optional[TreeNode]) -> int:
+
+    ans = 0
+
+    def f(head, n):
+
+      nonlocal ans
+
+      if not head:
+
+        return
+
+      if not head.left and not head.right:
+
+        n ^= 1 << head.val
+
+        if n & (n - 1) == 0:
+
+          ans += 1
+
+        return
+
+      f(head.left, n ^ 1 << head.val)
+      f(head.right, n ^ 1 << head.val)
+
+    f(head, 0)
+
+    return ans
