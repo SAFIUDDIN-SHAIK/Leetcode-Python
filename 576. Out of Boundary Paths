@@ -1,0 +1,21 @@
+class Solution:
+
+  def findPaths(self, m, n, maxMove, startRow, startColumn):
+
+    M = 1000000007
+
+    @functools.lru_cache(None)
+
+    def f(a, b, c):
+
+      if b < 0 or b == m or c < 0 or c == n:
+
+        return 1
+
+      if a == 0:
+
+        return 0
+
+      return (f(a - 1, b + 1, c) + f(a - 1, b - 1, c) + f(a - 1, b, c + 1) + f(a - 1, b, c - 1)) % M
+
+    return f(maxMove, startRow, startColumn)
