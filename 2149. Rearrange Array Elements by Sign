@@ -1,0 +1,17 @@
+class Solution:
+
+  def rearrangeArray(self, nums: List[int]) -> List[int]:
+
+    ans = []
+    ind = []
+    l = []
+
+    for i in nums:
+
+      (ind if i > 0 else l).append(i)
+
+    for i, j in zip(ind, l):
+
+      ans += [i, j]
+
+    return ans
