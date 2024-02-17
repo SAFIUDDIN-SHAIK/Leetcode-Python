@@ -1,0 +1,25 @@
+class Solution:
+
+  def furthestBuilding(self, heights: List[int], bricks: int, ladders: int) -> int:
+
+    l = []
+
+    for i, (j, k) in enumerate(itertools.pairwise(heights)):
+
+      n = k - j
+
+      if n <= 0:
+
+        continue
+
+      heapq.heappush(l, n)
+
+      if len(l) > ladders:
+
+        bricks -= heapq.heappop(l)
+
+      if bricks < 0:
+
+        return i
+
+    return len(heights) - 1
