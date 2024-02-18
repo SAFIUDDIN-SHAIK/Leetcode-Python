@@ -1,0 +1,29 @@
+class Solution:
+
+  def mostBooked(self, n: int, meetings: List[List[int]]) -> int:
+
+    c = [0] * n
+    meetings.sort()
+    l = []
+    s = [i for i in range(n)]
+    heapq.heapify(s)
+
+    for i, j in meetings:
+
+      while l and l[0][0] <= i:
+
+        heapq.heappush(s, heapq.heappop(l)[1])
+
+      if s:
+
+        ind = heapq.heappop(s)
+        c[ind] += 1
+        heapq.heappush(l, (j, ind))
+
+      else:
+
+        num, ind = heapq.heappop(l)
+        c[ind] += 1
+        heapq.heappush(l, (num + (j - i), ind))
+
+    return c.index(max(c))
