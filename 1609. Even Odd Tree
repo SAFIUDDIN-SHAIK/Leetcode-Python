@@ -1,0 +1,36 @@
+class Solution:
+
+  def isEvenOddTree(self, root: Optional[TreeNode]) -> bool:
+
+    q = collections.deque([root])
+    f = True
+
+    while q:
+
+      n = -math.inf if f else math.inf
+
+      for _ in range(len(q)):
+
+        head = q.popleft()
+
+        if f and (head.val % 2 == 0 or head.val <= n):
+
+          return False
+
+        if not f and (head.val % 2 == 1 or head.val >= n):
+
+          return False
+
+        n = head.val
+
+        if head.left:
+
+          q.append(head.left)
+
+        if head.right:
+
+          q.append(head.right)
+
+      f = not f
+
+    return True
