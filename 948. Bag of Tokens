@@ -1,0 +1,23 @@
+class Solution:
+
+  def bagOfTokensScore(self, tokens: List[int], num: int) -> int:
+
+    ans = 0
+    n = 0
+    l = collections.deque(sorted(tokens))
+
+    while l and (num >= l[0] or n):
+
+      while l and num >= l[0]:
+
+        num -= l.popleft()
+        n += 1
+
+      ans = max(ans, n)
+
+      if l and n:
+
+        num += l.pop()
+        n -= 1
+
+    return ans
